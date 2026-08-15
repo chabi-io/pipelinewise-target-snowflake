@@ -311,6 +311,9 @@ class DbSync:
             connect_params['private_key_file'] = self.connection_config['private_key_file']
             connect_params['private_key_file_pwd'] = self.connection_config['private_key_file_pwd']
             connect_params['authenticator'] = 'SNOWFLAKE_JWT'
+        elif self.connection_config.get('private_key', None) is not None:
+            connect_params['private_key'] = self.connection_config['private_key']
+            connect_params['authenticator'] = 'SNOWFLAKE_JWT'
         else:
             connect_params['password'] = self.connection_config['password']
 
