@@ -33,7 +33,6 @@ def validate_config(config):
         'account',
         'dbname',
         'user',
-        'password',
         'warehouse',
         'file_format'
     ]
@@ -55,6 +54,9 @@ def validate_config(config):
     for k in required_config_keys:
         if not config.get(k, None):
             errors.append(f"Required key is missing from config: [{k}]")
+
+    if not config.get('private_key_file', None) and not config.get('private_key_file', None) and not config.get('password', None):
+        errors.append("Private key/password is missing from config")
 
     # Check target schema config
     config_default_target_schema = config.get('default_target_schema', None)
